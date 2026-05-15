@@ -803,14 +803,17 @@ drwxr-xr-x  5 agent-admin agent-core  4096 May 14 ...  ..
 ### 6-1. 바이너리 파일을 컨테이너에 복사
 
 > **새 터미널 탭을 열어서 Mac(로컬)에서 실행합니다.**
+> 먼저 클론한 저장소 폴더로 이동한 뒤 실행하세요.
 
 ```bash
-docker cp /Users/jonghan/Codyssey/B1-1/agent-app codyssey-b1:/home/agent-admin/agent-app/agent-app
+cd ~/Codyssey/B1-1   # 저장소 위치에 맞게 수정
+docker cp $(pwd)/agent-app codyssey-b1:/home/agent-admin/agent-app/agent-app
 ```
 
 | 부분 | 설명 |
 |------|------|
 | `docker cp` | 로컬 ↔ 컨테이너 간 파일 복사 |
+| `$(pwd)` | 현재 디렉토리 경로로 자동 치환됨. 경로를 하드코딩하지 않아도 됨 |
 | `codyssey-b1:/경로` | 컨테이너명:컨테이너내부경로 |
 
 ✅ **예상 출력:**

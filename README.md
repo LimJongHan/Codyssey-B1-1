@@ -28,7 +28,21 @@ B1-1/
 ├── Tutorial.md       # 미션 직접 수행을 위한 단계별 튜토리얼
 ├── monitor.sh        # 시스템 관제 자동화 스크립트 (핵심 과제)
 ├── report.sh         # 로그 통계 분석 스크립트 (보너스 1)
-└── archive.sh        # 로그 보존 정책 스크립트 (보너스 2)
+├── archive.sh        # 로그 보존 정책 스크립트 (보너스 2)
+└── images/           # 수행내역서 증거 캡처 이미지
+    ├── 01_ssh.png              # SSH 설정 및 포트 리슨 확인
+    ├── 02_ufw.png              # UFW 방화벽 상태 확인
+    ├── 03_accounts.png         # 계정 및 그룹 확인
+    ├── 04_dir_permissions.png  # 디렉토리 권한 확인
+    ├── 05_acl.png              # ACL 확인
+    ├── 06_boot_sequence.png    # Boot Sequence 및 포트 리슨 확인
+    ├── 07_monitor_permission.png # monitor.sh 권한 확인
+    ├── 08_monitor_run.png      # monitor.sh 수동 실행 결과
+    ├── 09_crontab.png          # crontab 등록 확인
+    ├── 10_monitor_log.png      # monitor.log 자동 누적 확인
+    ├── 11_report_full.png      # report.sh 전체 실행 결과
+    ├── 12_report_range.png     # report.sh 구간 필터 실행 결과
+    └── 13_archive.png          # archive.sh 실행 결과
 ```
 
 ---

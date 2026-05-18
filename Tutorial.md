@@ -76,7 +76,7 @@ Cannot connect to the Docker daemon   → Docker Desktop이 실행되지 않은 
 
 ```bash
 docker run -d \
-  --name codyssey-b1 \
+  --name codyssey-b1-1 \
   --hostname agent-server \
   --platform linux/amd64 \
   -p 20022:20022 \
@@ -90,7 +90,7 @@ docker run -d \
 |------|------|
 | `run` | 새 컨테이너를 만들고 실행하는 서브명령어 |
 | `-d` | Detach. 백그라운드로 실행. 없으면 터미널이 컨테이너에 붙잡혀 다른 명령을 못 입력함 |
-| `--name codyssey-b1` | 컨테이너에 이름 지정. 없으면 Docker가 랜덤 이름 부여 (`vigorous_einstein` 같은 식) |
+| `--name codyssey-b1-1` | 컨테이너에 이름 지정. 없으면 Docker가 랜덤 이름 부여 (`vigorous_einstein` 같은 식) |
 | `--hostname agent-server` | 컨테이너 내부에서 보이는 호스트명. 프롬프트에 `root@agent-server`로 표시됨 |
 | `--platform linux/amd64` | x86_64 아키텍처로 실행. Apple Silicon(M1/M2) Mac은 ARM이라 x86 바이너리를 그냥 못 돌림 |
 | `-p 20022:20022` | 포트 포워딩. `호스트포트:컨테이너포트`. 내 Mac의 20022 → 컨테이너의 20022 |
@@ -118,7 +118,7 @@ Status: Downloaded newer image for ubuntu:24.04
 ### 0-3. 컨테이너 안으로 들어가기
 
 ```bash
-docker exec -it codyssey-b1 bash
+docker exec -it codyssey-b1-1 bash
 ```
 
 | 부분 | 설명 |
@@ -126,7 +126,7 @@ docker exec -it codyssey-b1 bash
 | `exec` | 이미 실행 중인 컨테이너 안에서 명령어 실행 |
 | `-i` | Interactive. 표준 입력(키보드)을 컨테이너로 전달 |
 | `-t` | TTY. 터미널처럼 보이게 가상 터미널 할당. `-i`와 보통 함께 씀 (`-it`) |
-| `codyssey-b1` | 대상 컨테이너 이름 |
+| `codyssey-b1-1` | 대상 컨테이너 이름 |
 | `bash` | 컨테이너 안에서 실행할 명령어. bash 쉘을 열겠다는 뜻 |
 
 ✅ **예상 출력:**
@@ -257,6 +257,14 @@ GNU nano x.x        /etc/ssh/sshd_config
 > `#`은 주석 기호입니다. 제거하고 값을 바꿔야 적용됩니다.
 
 저장(`Ctrl+O` → `Enter`) 후 종료(`Ctrl+X`)
+
+> **대안: sed로 한 번에 처리하기**
+> nano 대신 아래 명령어로 동일한 결과를 낼 수 있습니다.
+> ```bash
+> sed -i 's/#Port 22/Port 20022/' /etc/ssh/sshd_config
+> sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+> ```
+> `sed -i`는 파일을 직접 수정하는 자동화에 적합한 방식입니다. 자동화 스크립트나 반복 작업에 유용하지만, 처음에는 nano로 파일 구조를 직접 눈으로 확인하는 것을 권장합니다.
 
 ---
 
@@ -807,18 +815,18 @@ drwxr-xr-x  5 agent-admin agent-core  4096 May 14 ...  ..
 
 ```bash
 cd ~/Codyssey/B1-1   # 저장소 위치에 맞게 수정
-docker cp $(pwd)/agent-app codyssey-b1:/home/agent-admin/agent-app/agent-app
+docker cp $(pwd)/agent-app codyssey-b1-1:/home/agent-admin/agent-app/agent-app
 ```
 
 | 부분 | 설명 |
 |------|------|
 | `docker cp` | 로컬 ↔ 컨테이너 간 파일 복사 |
 | `$(pwd)` | 현재 디렉토리 경로로 자동 치환됨. 경로를 하드코딩하지 않아도 됨 |
-| `codyssey-b1:/경로` | 컨테이너명:컨테이너내부경로 |
+| `codyssey-b1-1:/경로` | 컨테이너명:컨테이너내부경로 |
 
 ✅ **예상 출력:**
 ```
-Successfully copied 7.93MB to codyssey-b1:/home/agent-admin/agent-app/agent-app
+Successfully copied 7.93MB to codyssey-b1-1:/home/agent-admin/agent-app/agent-app
 ```
 
 ---
